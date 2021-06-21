@@ -567,7 +567,7 @@ if __name__ == '__main__':
             
             print(little_file)
             # Strip the file ending and split by '#'
-            pieces = re.sub(r"\.[^\.#]*", "", os.path.basename(little_file)).split("#")
+            pieces = re.sub(r"\.[^\.]*$", "", os.path.basename(little_file)).split("#")
             pieces.insert(0, little_file)
             little_files.append(pieces)
 

@@ -2,11 +2,9 @@
 
 #SBATCH --job-name=REDItools2Job
 #SBATCH -N 1
-#SBATCH -n 36
-#SBATCH -p gll_usr_prod
+#SBATCH -n 4
 #SBATCH --mem=115GB
-#SBATCH --time 05:00:00
-#SBATCH --account ELIX4_manniron
+#SBATCH --time 00:10:00
 #SBATCH --error REDItools2Job.err
 #SBATCH --output REDItools2Job.out
 
@@ -29,7 +27,7 @@ REFERENCE_DNA=$(basename "$REFERENCE")
 SIZE_FILE="test/chr21.fa.fai"
 
 ##number of utilized cores
-NUM_CORES=2
+NUM_CORES=3
 
 ##setting output file
 OUTPUT_FILE="test_results/output/parallel_table.txt.gz"
@@ -47,13 +45,14 @@ OUTPUT_DIR=$(basename "$OUTPUT_FILE")
 #########################################################
 ########    Modules loading
 #########################################################
+module load anaconda/python2.7
+module load htslib
+module load samtools/1.9
+#module load autoload openmpi/3.1.4--gnu--7.3.0
+module load openmpi/gnu/4.0.4
+# Load the conda environment.
+source activate /N/project-old/hatoSlate2/twmccart-dsRNA/reditools2
 
-module load profile/bioinf
-module load python/2.7.12
-module load autoload samtools/1.9
-module load autoload profile/global
-module load autoload openmpi/3.1.4--gnu--7.3.0
-module load autoload samtools
 
 echo "Launching REDItool on $SAMPLE_ID (output_file=$OUTPUT_FILE)";
 
@@ -115,3 +114,6 @@ echo "[STATS] [MERGE] START="$t1_human" ["$t1"] END="$t2_human" ["$t2"] ELAPSED=
 
 echo "END:"`date`
 echo "OK" > $TEMP_DIR/status.txt
+
+# Unload conda environment
+source deactivate

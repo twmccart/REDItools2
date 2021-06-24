@@ -165,7 +165,7 @@ if __name__ == '__main__':
     size = comm.Get_size()
 
     options = reditools.parse_options()
-    options["remove_header"] = True
+    #options["remove_header"] = True
     
     parser = argparse.ArgumentParser(description='REDItools 2.0')
     parser.add_argument('-G', '--coverage-file', help='The coverage file of the sample to analyze')

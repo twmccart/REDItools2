@@ -144,7 +144,8 @@ if __name__ == '__main__':
     size = comm.Get_size()
 
     options = reditools.parse_options()
-    #options["remove_header"] = True
+    # Until tabix can properly index the output, the header is disruptive.
+    options["remove_header"] = True
     
     parser = argparse.ArgumentParser(description='REDItools 2.0')
     parser.add_argument('-D', '--coverage-dir', help='The coverage directory containing the coverage file of the sample to analyze divided by chromosome')
